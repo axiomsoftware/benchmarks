@@ -25,3 +25,14 @@ function insert30000pageswithcommit() {
     var end = new Date().getTime()/1000; //in seconds
     writeResults(start, end, n);
 }
+
+function countPageObjects() {
+    var start = new Date().getTime()/1000;
+    var count = app.getHitCount('Page');
+    var end = new Date().getTime()/1000;
+    res.writeln("Number of Page objects found: " + count + ". Took " + (end-start) + " seconds.");
+}
+
+function loadNpages() {
+
+}

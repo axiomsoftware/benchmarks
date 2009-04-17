@@ -33,3 +33,12 @@ def insert30000pages(request):
     insertNpages(n)
     end = time.time() #in seconds
     return write_response(start, end, n)
+
+def countPageObjects(request):
+    start = time.time()
+    count = len(Page.objects.all())
+    end = time.time()
+    return HttpResponse("Number of Page objects found: " + str(count) + ". Took " + str((end-start)) + " seconds.")
+
+def loadNpages(request):
+    pass
