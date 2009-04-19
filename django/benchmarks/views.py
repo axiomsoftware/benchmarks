@@ -40,5 +40,10 @@ def countPageObjects(request):
     end = time.time()
     return HttpResponse("Number of Page objects found: " + str(count) + ". Took " + str((end-start)) + " seconds.")
 
-def loadNpages(request):
-    pass
+def testloops(request):
+    r = range(1000000)
+    start = time.time()
+    for i in r:
+        o = r[i]
+    end = time.time()
+    return HttpResponse(" ".join(["For loop took ",str((end-start)), "seconds. That's ", str((end-start)/1000000), " seconds per iteration."]))

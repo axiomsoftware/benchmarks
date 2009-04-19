@@ -34,3 +34,39 @@ function writeResults(start, end, iters) {
 
     res.writeln(response.join(" "));
 }
+
+function writeLoopResults(loop_results) {
+    var results = <html>
+	<head>
+	</head>
+	<body>
+	    <h1>Loop Results</h1>
+	    <table>
+		<tr style="text-align:center">
+		    <th width="15%">Loop</th>
+		    <th width="20%">Start</th>
+		    <th width="20%">End</th>
+		    <th width="15%">Delta (Seconds)</th>
+		    <th width="15%">Iters</th>
+		    <th>Time Per Iter</th>
+		</tr>
+	    </table>
+	</body>
+	</html>;
+
+    var table = results.body.table[0];
+    for (var loop_id in loop_results) {
+	var result = loop_results[loop_id];
+	var tr = <tr>
+	    <td>{loop_id}</td>
+	    <td>{result.start/1000}</td>
+	    <td>{result.end/1000}</td>
+	    <td>{result.delta/1000}</td>
+	    <td>{result.iters}</td>
+	    <td>{result.time_per/1000}</td>
+	    </tr>;
+	table.appendChild(tr);
+    }
+
+    res.write(results);
+}
