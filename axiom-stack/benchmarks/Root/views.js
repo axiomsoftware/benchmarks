@@ -33,8 +33,31 @@ function countPageObjects() {
     res.writeln("Number of Page objects found: " + count + ". Took " + (end-start) + " seconds.");
 }
 
-function loadNpages() {
+function load50000hits() {
+    var n = 50000;
+    loadNfunction(n, loadNhits);
+}
 
+function load50000hitsmax() {
+    var n = 50000;
+    loadNfunction(n, loadNhitsmax);
+}
+
+function load50000objects() {
+    var n = 50000;
+    loadNfunction(n, loadNobjects);
+}
+
+//Relational
+function load50000objectsr() {
+    var n = 50000;
+    loadNfunction(n, loadNobjectsr);
+}
+
+
+function load50000objectsmax() {
+    var n = 50000;
+    loadNfunction(n, loadNobjectsmax);
 }
 
 function test_loops() {

@@ -10,5 +10,6 @@ urlpatterns = patterns('',
                        (r'^insert1000pages/', insert1000pages),
                        (r'^insert30000pages/', insert30000pages),
                        (r'^countPageObjects/', countPageObjects),
+                       (r'^load50000objects/', load50000objects),
                        (r'^testloops/', testloops),
 )

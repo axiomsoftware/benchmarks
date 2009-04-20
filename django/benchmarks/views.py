@@ -17,7 +17,7 @@ def write_response(start, end, iters):
     res.append(str(start))
     res.append("End")
     res.append(str(end))
-    res.extend(["Took ",str((end-start))," seconds. That's ",str(((end-start)/iters))," seconds per save. And, ", str((iters/(end - start))), " saves per second."])
+    res.extend(["Took ",str((end-start))," seconds. That's ",str(((end-start)/iters))," seconds per iteration. And, ", str((iters/(end - start))), " iterations per second."])
     return HttpResponse(" ".join(res))
     
 def insert1000pages(request):
@@ -39,6 +39,16 @@ def countPageObjects(request):
     count = len(Page.objects.all())
     end = time.time()
     return HttpResponse("Number of Page objects found: " + str(count) + ". Took " + str((end-start)) + " seconds.")
+
+def loadNobjects(n):
+    objs = Page.objects.all()[:n]
+
+def load50000objects(request):
+    n = 50000
+    start = time.time()
+    loadNobjects(n)
+    end = time.time()
+    return write_response(start, end, n)
 
 def testloops(request):
     r = range(1000000)

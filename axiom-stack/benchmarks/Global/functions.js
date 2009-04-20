@@ -16,6 +16,41 @@ function insertNpages(n, start, commit) {
     }
 }
 
+function loadNhits(n) {
+    //hits allows paging for memory purposes
+    return app.getHits('Page', {});
+}
+
+function loadNhitsmax(n, max) {
+    //uses topdocs (scoring) and loads objects
+    return app.getHits('Page', {}, {maxlength: n});
+}
+
+function loadNobjects(n) {
+    //uses hits and loads objects
+    return app.getObjects('Page', {}).slice(0, n);
+}
+
+function loadNobjectsr(n) {
+    return app.getObjects('RPage', {}).slice(0, n);
+}
+
+function loadNobjectsmax(n, max) {
+    //uses topdocs (scoring) and loads objects
+    return app.getObjects('Page', {}, {maxlength: n}).slice(0, n);
+}
+
+function loadNfunction(n, func) {
+    //get the actual objects, not just
+    var start = new Date().getTime();
+    var objects = func(n);
+    var end = new Date().getTime();
+    start /= 1000;
+    end /= 1000;
+
+    writeResults(start, end, n);
+}
+
 function writeResults(start, end, iters) {
     var response = [];
     response.push('Start');
@@ -27,10 +62,10 @@ function writeResults(start, end, iters) {
     response.push((end-start));
     response.push(" seconds. That's ");
     response.push(((end-start)/iters));
-    response.push(" seconds per save.");
+    response.push(" seconds per iteration.");
     response.push(" And, ");
     response.push((iters/(end-start)));
-    response.push(" saves per second.");
+    response.push(" iterations per second.");
 
     res.writeln(response.join(" "));
 }
