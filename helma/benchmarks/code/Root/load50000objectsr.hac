@@ -1,0 +1,42 @@
+var n = 50000;
+loadNfunction(n, loadNobjectsr);
+
+function loadNobjectsr(n) {
+    root.prefetchChildren(0, n);
+    var results = [];
+    for (var i = 0; i < n; i++) {
+	results.push(root.get(i));
+    }
+    
+    return results;
+}
+
+function loadNfunction(n, func) {
+    //get the actual objects, not just
+    var start = new Date().getTime();
+    var objects = func(n);
+    var end = new Date().getTime();
+    start /= 1000;
+    end /= 1000;
+
+    writeResults(start, end, n);
+}
+
+function writeResults(start, end, iters) {
+    var response = [];
+    response.push('Start');
+    response.push(start);
+    response.push('End');
+    response.push(end);
+
+    response.push("Took ");
+    response.push((end-start));
+    response.push(" seconds. That's ");
+    response.push(((end-start)/iters));
+    response.push(" seconds per iteration.");
+    response.push(" And, ");
+    response.push((iters/(end-start)));
+    response.push(" iterations per second.");
+
+    res.writeln(response.join(" "));
+}
